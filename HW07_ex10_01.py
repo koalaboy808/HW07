@@ -7,17 +7,12 @@
 #  - Do not put anything but pass in main()
 
 def nested_sum(list_):
-	
-	summed = 0
+	l_new = [nested_sum(i) if (isinstance(i,list)) else i for i in list_]
+	return sum(l_new)
+	#print(l_new)
 
-	for i in list_:
-		if isinstance(i, list):
-			nested_sum(i)
-		else:
-			summed += i
-			#print("i is: " + str(i))
-			#print("summed is: " + str(summed))
-	return summed
+
+
 
 '''
 Hey Daniel! can you do this without using the sum function?
@@ -34,7 +29,14 @@ def list_seperated(list_):
 
 ##############################################################################
 def main():
-    pass
+	list_1 = [1, [2], 2, 3, [1, 3, 6]]
+	list_2 = [[[[2]], 3, 1, 1, [1,1,1,1,1]], 1]
+	list_3 = []
+	list_4 = [1]
+	print nested_sum(list_1)  # 18
+	print nested_sum(list_2)  # 13
+	print nested_sum(list_3)  # 0
+	print nested_sum(list_4)  # 1
 
 if __name__ == '__main__':
     main()
