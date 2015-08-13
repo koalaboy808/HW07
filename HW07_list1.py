@@ -21,8 +21,19 @@
 # and last chars of the string are the same.
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
-  # +++your code here+++
-  return
+  count = 0
+  for i in words:
+    if (len(i) > 1) and (i[0] == i[len(i)-1]):
+      count += 1
+  return count
+
+  '''
+  # much better way using list comprehension
+
+  number_words = [1 for i in words if ( (len(i) > 1) and (i[0] == i[len(i)-1]) )]
+  return sum(number_words)
+
+  '''
 
 
 # B. front_x
@@ -32,9 +43,37 @@ def match_ends(words):
 # ['xanadu', 'xyz', 'aardvark', 'apple', 'mix']
 # Hint: this can be done by making 2 lists and sorting each of them
 # before combining them.
+
+def x_first(words):
+  # subset by if x is first character then sort using sorted function
+  x_first = []
+  for i in words:
+    if i[0] == "x":
+      x_first.append(i)
+  return sorted(x_first)
+
+def secondary_words(words):
+  # subset by if x is not first character then sort using sorted function
+  secondary_words = []
+  for i in words:
+    if i[0] != "x":
+      secondary_words.append(i)
+  return sorted(secondary_words)
+
 def front_x(words):
-  # +++your code here+++
-  return
+  # add the two lists together
+  return x_first(words) + secondary_words(words)
+
+'''
+# better way using list comprehension
+
+def front_x(words):
+  x_first = [i for i in words if i[0] == "x"]
+  secondary_words = [i for i in words if i not in x_first]
+  return sorted(x_first) + sorted(secondary_words)
+
+'''
+
 
 
 
@@ -44,9 +83,12 @@ def front_x(words):
 # e.g. [(1, 7), (1, 3), (3, 4, 5), (2, 2)] yields
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
+from operator import itemgetter
+
 def sort_last(tuples):
   # +++your code here+++
-  return
+  sorted_tuples = sorted(tuples, key=itemgetter(-1))
+  return sorted_tuples
 
 
 # Simple provided test() function used in main() to print
